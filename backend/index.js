@@ -207,6 +207,25 @@ app.post('/login', async(req,res) =>{
     }
 })
 
+//creating endpoint for new collections
+
+app.get('/newcollections', async(req,res) =>{
+    let products = await Product.find({});
+    let newcollection = products.slice(1).slice(-8); //get recently added 8 products
+    console.log("new collection fetched");
+    res.send(newcollection);
+    
+})
+
+//creating endpoint for popular in women
+app.get('/popularinwoman', async(req,res) =>{
+    let products = await Product.find({category:"women"});
+    let popular_in_women = products.slice(1).slice(0,4); //get recently added 8 products
+    console.log("popular in women fetched fetched");
+    res.send(popular_in_women);
+    
+})
+
 app.listen(port,(error)=>{
     if(!error) {
         console.log("Server Running on Port "+port)
